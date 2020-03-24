@@ -10,6 +10,9 @@ const devMode = process.env.NODE_ENV !== 'production'
 module.exports = {
   mode: devMode ? 'development' : 'production',
   devtool: devMode ? 'cheap-module-eval-source-map' : 'hidden-source-map',
+  devServer: {
+    contentBase: './dist',
+  },
   entry: './example/index.tsx',
   output: {
     path: path.join(__dirname, 'dist'),
@@ -63,9 +66,10 @@ module.exports = {
             loader: 'css-loader',
             options: {
               sourceMap: true,
-              modules: true,
               importLoaders: 1,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              }
             },
           },
           'postcss-loader'
