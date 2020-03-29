@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const merge = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const darkThemeVars = require('antd/dist/dark-theme')
 
 const devMode = process.env.NODE_ENV !== 'production'
 
@@ -67,6 +68,12 @@ module.exports = {
                   },
                 ],
               ],
+              plugins: [
+                [
+                  'import',
+                  { libraryName: 'antd', libraryDirectory: 'es', style: true },
+                ],
+              ],
             },
           },
           {
@@ -99,6 +106,33 @@ module.exports = {
             },
           },
           'postcss-loader',
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader', // translates CSS into CommonJS
+          },
+          {
+            loader: 'less-loader', // compiles Less to CSS
+            options: {
+              modifyVars: {
+                // 'primary-color': '#1DA57A',
+                // 'link-color': '#1DA57A',
+                // 'border-radius-base': '2px',
+                // hack: `true; @import "your-less-file-path.less";`, // Override with less file
+                hack: `true;@import "${require.resolve(
+                  'antd/lib/style/color/colorPalette.less'
+                )}";`,
+                ...darkThemeVars,
+              },
+              javascriptEnabled: true,
+            },
+          },
         ],
       },
       {
