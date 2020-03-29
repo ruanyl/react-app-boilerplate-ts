@@ -9,6 +9,10 @@
   <body>
     <div id="root">
     </div>
+    <% for(var i=0; i<htmlWebpackPlugin.options.jsassets.length; i++) { %>
+    <script src="<%= htmlWebpackPlugin.options.jsassets[i] %>"></script>
+    <% } %>
+
     <% for(var i=0; i<htmlWebpackPlugin.files.js.length; i++) { %>
     <script src="<%= htmlWebpackPlugin.files.js[i] %>"></script>
     <% } %>

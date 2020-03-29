@@ -13,7 +13,7 @@ export class MyComponent extends React.Component<any, any> {
     console.log({ ...a })
     return (
       <div className={styles.myComponent}>
-        <Button type="primary">Hello world...</Button>
+        <Button type="primary">Hello world</Button>
       </div>
     )
   }
