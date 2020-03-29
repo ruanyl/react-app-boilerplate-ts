@@ -28,12 +28,12 @@ module.exports = {
           test: /\.css$/,
           chunks: 'all',
           enforce: true,
-        }
-      }
-    }
+        },
+      },
+    },
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js"]
+    extensions: ['.ts', '.tsx', '.js'],
   },
 
   plugins: [
@@ -43,12 +43,37 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
-    })
+    }),
   ],
 
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: 'ts-loader' },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              presets: [
+                [
+                  '@babel/preset-env',
+                  {
+                    targets: {
+                      chrome: '58',
+                      ie: '11',
+                    },
+                  },
+                ],
+              ],
+            },
+          },
+          {
+            loader: 'ts-loader',
+          },
+        ],
+      },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         use: {
@@ -70,11 +95,11 @@ module.exports = {
               importLoaders: 1,
               modules: {
                 localIdentName: '[name]__[local]___[hash:base64:5]',
-              }
+              },
             },
           },
-          'postcss-loader'
-        ]
+          'postcss-loader',
+        ],
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
