@@ -12,8 +12,9 @@ module.exports = {
   devtool: devMode ? 'cheap-module-eval-source-map' : 'hidden-source-map',
   devServer: {
     contentBase: './dist',
+    hot: true,
   },
-  entry: './example/index.tsx',
+  entry: './src/index.tsx',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].[hash].js',
@@ -37,7 +38,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './example/index.html',
+      template: './src/index.html',
       inject: false,
     }),
     new MiniCssExtractPlugin({

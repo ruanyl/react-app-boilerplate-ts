@@ -44,6 +44,12 @@
     "react": "^16.8.2",
     "react-dom": "^16.8.2"
   },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true
+  },
   "author": "Yulong Ruan <ruanyu1@gmail.com>",
   "license": "MIT",
   "keywords": [
