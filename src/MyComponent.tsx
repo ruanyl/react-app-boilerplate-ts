@@ -9,8 +9,6 @@ export class MyComponent extends React.Component<any, any> {
   }
 
   render() {
-    const a = {}
-    console.log({ ...a })
     return (
       <div className={styles.myComponent}>
         <Button type="primary">Hello world</Button>

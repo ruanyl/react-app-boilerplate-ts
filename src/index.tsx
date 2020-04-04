@@ -1,6 +1,16 @@
 import * as React from 'react'
-
-import { MyComponent } from './MyComponent'
+import { Col, Row } from 'antd'
 import { render } from 'react-dom'
 
-render(<MyComponent />, document.getElementById('root'))
+import { MyComponent } from './MyComponent'
+
+render(
+  <>
+    <Row>
+      <Col span={24}>
+        <MyComponent />
+      </Col>
+    </Row>
+  </>,
+  document.getElementById('root')
+)
