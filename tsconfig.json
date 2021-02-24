@@ -11,5 +11,6 @@
     "jsx": "react",
     "target": "esnext",
     "noUnusedLocals": true
-  }
+  },
+  "include": ["src"]
 }

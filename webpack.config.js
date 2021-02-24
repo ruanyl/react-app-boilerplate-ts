@@ -9,7 +9,7 @@ const devMode = process.env.NODE_ENV !== 'production'
 /* eslint-disable max-len */
 module.exports = {
   mode: devMode ? 'development' : 'production',
-  devtool: devMode ? 'cheap-module-eval-source-map' : 'hidden-source-map',
+  devtool: devMode ? 'eval-cheap-module-source-map' : 'hidden-source-map',
   devServer: {
     contentBase: './dist',
     hot: true,
@@ -66,11 +66,10 @@ module.exports = {
                     },
                   },
                 ],
+                '@babel/preset-typescript',
+                '@babel/preset-react',
               ],
             },
-          },
-          {
-            loader: 'ts-loader',
           },
         ],
       },
