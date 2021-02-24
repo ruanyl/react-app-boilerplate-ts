@@ -3,7 +3,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "strictNullChecks": true,
+    "strict": true,
     "esModuleInterop": true,
     "removeComments": true,
     "preserveConstEnums": true,

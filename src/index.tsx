@@ -1,6 +1,13 @@
 import React from 'react'
-
-import { MyComponent } from './MyComponent'
 import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 
-render(<MyComponent />, document.getElementById('root'))
+import { Root } from './Root'
+import { store } from './store'
+
+render(
+  <Provider store={store}>
+    <Root />
+  </Provider>,
+  document.getElementById('root')
+)

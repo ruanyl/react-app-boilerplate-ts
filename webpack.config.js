@@ -1,12 +1,14 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const merge = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const packages = require('./package.json')
 
 const devMode = process.env.NODE_ENV !== 'production'
-const lib = Object.keys(packages.dependencies)
+const lib = Object.keys(packages.dependencies).filter(
+  (packageName) => packageName !== 'antd'
+)
 console.log(lib)
 
 /* eslint-disable max-len */
@@ -76,6 +78,7 @@ module.exports = [
       new webpack.DllReferencePlugin({
         manifest: path.resolve(__dirname, 'dist/manifest.json'),
       }),
+      new ForkTsCheckerWebpackPlugin(),
     ],
 
     module: {
@@ -100,6 +103,16 @@ module.exports = [
                   ],
                   '@babel/preset-typescript',
                   '@babel/preset-react',
+                ],
+                plugins: [
+                  [
+                    'import',
+                    {
+                      libraryName: 'antd',
+                      libraryDirectory: 'es',
+                      style: true,
+                    },
+                  ],
                 ],
               },
             },
@@ -130,6 +143,25 @@ module.exports = [
               },
             },
             'postcss-loader',
+          ],
+        },
+        {
+          test: /\.less$/,
+          use: [
+            {
+              loader: 'style-loader',
+            },
+            {
+              loader: 'css-loader', // translates CSS into CommonJS
+            },
+            {
+              loader: 'less-loader', // compiles Less to CSS
+              options: {
+                lessOptions: {
+                  javascriptEnabled: true,
+                },
+              },
+            },
           ],
         },
         {
